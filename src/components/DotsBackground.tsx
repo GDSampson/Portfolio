@@ -1,5 +1,7 @@
 'use client';
 
+// build with the help of chatgpt
+
 import { useEffect, useRef } from 'react';
 
 interface DotProps {
