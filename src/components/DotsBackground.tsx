@@ -1,8 +1,6 @@
 'use client';
 
-// build with the help of chatgpt
-
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface DotProps {
   x: number;
@@ -10,6 +8,8 @@ interface DotProps {
   dx: number;
   dy: number;
   inMouseRadius: boolean;
+  move: () => void;
+  draw: (ctx: CanvasRenderingContext2D) => void;
 }
 
 class Dot implements DotProps {
@@ -18,32 +18,36 @@ class Dot implements DotProps {
   dx: number;
   dy: number;
   inMouseRadius: boolean;
+  private readonly canvasWidth: number;
+  private readonly canvasHeight: number;
 
-  constructor(x: number, y: number) {
+  constructor(x: number, y: number, canvasWidth: number, canvasHeight: number) {
     this.x = x;
     this.y = y;
     this.dx = Math.random() * 0.1 - 1 * 0.1;
     this.dy = Math.random() * 0.1 - 1 * 0.1;
     this.inMouseRadius = false;
+    this.canvasWidth = canvasWidth;
+    this.canvasHeight = canvasHeight;
   }
 
-  move(canvasWidth: number, canvasHeight: number): void {
+  move(): void {
     this.x += this.dx;
     this.y += this.dy;
 
-    if (this.x < 0 || this.x > canvasWidth) this.dx = -this.dx;
-    if (this.y < 0 || this.y > canvasHeight) this.dy = -this.dy;
+    if (this.x < 0 || this.x > this.canvasWidth) this.dx = -this.dx;
+    if (this.y < 0 || this.y > this.canvasHeight) this.dy = -this.dy;
   }
 
-  draw(ctx: CanvasRenderingContext2D, dotRadius: number): void {
+  draw(ctx: CanvasRenderingContext2D): void {
     ctx.beginPath();
-    ctx.arc(this.x, this.y, dotRadius, 0, Math.PI * 2);
+    ctx.arc(this.x, this.y, 1, 0, Math.PI * 2);
     ctx.fillStyle = '#68AF78';
     ctx.fill();
   }
 }
 
-const DotsBackground: React.FC = () => {
+export default function DotsBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -53,30 +57,26 @@ const DotsBackground: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Constants
     const CONSTANTS = {
       maxDots: 500,
       maxDist: 100,
-      dotRadius: 1,
       mouseRadius: 450,
     } as const;
 
-    // State
-    let mouseX = 0;
-    let mouseY = 0;
-    const dots: Dot[] = [];
+    let mouseX = canvas.width / 2;
+    let mouseY = canvas.height / 2;
 
-    // Set canvas size
     const setCanvasSize = (): void => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
     setCanvasSize();
 
-    const createDots = (): void => {
-      for (let i = 0; i < CONSTANTS.maxDots; i++) {
-        dots.push(new Dot(Math.random() * canvas.width, Math.random() * canvas.height));
-      }
+    const dots: Dot[] = [];
+
+    const handleMouseMove = (e: MouseEvent): void => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     };
 
     const connectDots = (): void => {
@@ -105,40 +105,39 @@ const DotsBackground: React.FC = () => {
       }
     };
 
+    // Initialize dots
+    for (let i = 0; i < CONSTANTS.maxDots; i++) {
+      dots.push(new Dot(
+        Math.random() * canvas.width,
+        Math.random() * canvas.height,
+        canvas.width,
+        canvas.height
+      ));
+    }
+
     const animate = (): void => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       dots.forEach(dot => {
-        dot.move(canvas.width, canvas.height);
-        dot.draw(ctx, CONSTANTS.dotRadius);
+        dot.move();
+        dot.draw(ctx);
       });
 
       connectDots();
       requestAnimationFrame(animate);
     };
 
-    // Initialize
-    createDots();
+    // Start animation
     animate();
 
     // Event listeners
-    const handleMouseMove = (e: MouseEvent): void => {
-      const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
-    };
-
-    const handleResize = (): void => {
-      setCanvasSize();
-    };
-
-    window.addEventListener('resize', handleResize);
-    canvas.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', setCanvasSize);
 
     // Cleanup
     return () => {
-      window.removeEventListener('resize', handleResize);
-      canvas.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', setCanvasSize);
     };
   }, []);
 
@@ -149,6 +148,4 @@ const DotsBackground: React.FC = () => {
       aria-hidden="true"
     />
   );
-};
-
-export default DotsBackground;
+}
