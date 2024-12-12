@@ -21,8 +21,8 @@ export default function About() {
 
     return (
         <main className="min-h-screen p-8 pt-20">
-            <h1 className="text-6xl font-light text-center mb-16">
-                <span className="border border-emerald-400 px-8 py-4 text-emerald-400">About</span>
+            <h1 className="text-3xl font-light text-center mb-16">
+                <span className="border border-emerald-400 px-8 py-4 text-emerald-400 rounded">About</span>
             </h1>
 
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 text-white">
@@ -37,7 +37,7 @@ export default function About() {
                             className="rounded-lg"
                         />
                     </div>
-                    <p className="text-lg leading-relaxed">
+                    <p className="text-base leading-relaxed">
                         I've always enjoyed puzzles, as analyzing a problem to find a
                         solution provides me with a strong sense of accomplishment.
                         Delving into the world of development has been able to
@@ -48,14 +48,14 @@ export default function About() {
                 </div>
 
                 {/* right column */}
-                <div className="grid grid-cols-3 gap-8 place-items-center">
+                <div className="grid grid-cols-3 place-items-center">
                     {techStack.map((tech, index) => (
-                        <div key={index} className="w-20 h-20 flex items-center justify-center">
+                        <div key={index} className="w-20 h-20 flex items-center justify-center bg-emerald-500 rounded-lg">
                             <Image
                                 src={tech.src}
                                 alt={tech.name}
-                                width={80}
-                                height={80}
+                                width={40}
+                                height={40}
                                 className="max-w-full max-h-full object-contain"
                             />
                         </div>
