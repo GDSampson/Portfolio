@@ -27,24 +27,27 @@ export default function About() {
 
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 text-white">
                 {/* left column */}
-                <div className="space-y-8">
-                    <div className="relative max-w-md">
-                        <Image
-                            src="/personal-photo.jpg"
-                            alt="Personal photo"
-                            width={300}
-                            height={300}
-                            className="rounded-lg"
-                        />
+                <div className="space-y-8 pt-3.5 pl-5">
+                    <div className="max-w-md">
+
+                        <div className="relative">
+                            <Image
+                                src="/DadOfBoy.jpg"
+                                alt="Personal photo"
+                                width={250}
+                                height={250}
+                                className="rounded-lg"
+                            />
+                        </div>
+                        <p className="text-sm leading-relaxed mt-4" style={{ width: "250px"}}>
+                            I've always enjoyed puzzles, as analyzing a problem to find a
+                            solution provides me with a strong sense of accomplishment.
+                            Delving into the world of development has been able to
+                            pique my curiosity in ways I haven't found in any other line of
+                            work. I'm excited to continue learning and honing my skills in a
+                            field with like-minded people!
+                        </p>
                     </div>
-                    <p className="text-base leading-relaxed">
-                        I've always enjoyed puzzles, as analyzing a problem to find a
-                        solution provides me with a strong sense of accomplishment.
-                        Delving into the world of development has been able to
-                        pique my curiosity in ways I haven't found in any other line of
-                        work. I'm excited to continue learning and honing my skills in a
-                        field with like-minded people!
-                    </p>
                 </div>
 
                 {/* right column */}
