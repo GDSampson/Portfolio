@@ -16,7 +16,7 @@ export default function Header() {
     };
 
     return (
-        <header className="w-full bg-[#1E1E1E] px-4 py-2 fixed top-0 left-0 right-0">
+        <header className="w-full bg-[#1E1E1E] px-4 py-2 fixed top-0 left-0 right-0 z-50">
             <nav className="flex justify-end gap-6 max-w-7xl mx-auto">
                 <Link
                     href="/"
