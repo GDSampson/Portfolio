@@ -21,10 +21,6 @@ export default function About() {
 
     return (
         <main className="min-h-screen p-8 pt-20">
-            <h1 className="text-3xl font-light text-center mb-16">
-                <span className="border border-emerald-400 px-8 py-4 text-emerald-400 rounded">About</span>
-            </h1>
-
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 text-white">
                 {/* left column */}
                 <div className="space-y-8 pt-3.5 pl-5">

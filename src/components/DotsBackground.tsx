@@ -60,9 +60,9 @@ export default function DotsBackground() {
     if (!ctx) return;
 
     const CONSTANTS = {
-      maxDots: 500,
+      maxDots: 100,
       maxDist: 100,
-      mouseRadius: 450,
+      mouseRadius: 200,
     } as const;
 
     let mouseX = canvas.width / 2;
@@ -95,8 +95,8 @@ export default function DotsBackground() {
                 ctx.beginPath();
                 ctx.moveTo(dots[i].x, dots[i].y);
                 ctx.lineTo(dots[j].x, dots[j].y);
-                ctx.strokeStyle = 'rgba(0, 188, 212, 0.5)';
-                ctx.lineWidth = 0.5;
+                ctx.strokeStyle = 'rgba(0, 200, 150, 1)';
+                ctx.lineWidth = 1;
                 ctx.stroke();
               }
             }
