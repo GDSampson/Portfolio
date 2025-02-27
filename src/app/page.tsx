@@ -41,7 +41,7 @@ export default function Home() {
           Hi, I{"'"}m <span className="text-orange-400">Daniel</span>!
         </h1>
         <p className="text-2xl md:text-4xl lg:text-5xl font-light mb-12">
-          A full stack web developer.
+          Welcome to my web development portfolio.
         </p>
         <button 
           onClick={() => setShowModal(true)}
