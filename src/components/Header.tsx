@@ -4,12 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export default function Header() {
-    let pathname = '';
-    try {
-        pathname = usePathname() || '';
-    } catch (e) {
-        console.error('Error getting pathname:', e);
-    }
+    const pathname = usePathname() || '';
 
     const isActive = (path: string): boolean => {
         return pathname === path;
@@ -20,16 +15,12 @@ export default function Header() {
             <nav className="flex justify-end gap-6 max-w-7xl mx-auto">
                 <Link
                     href="/"
-                    className={`text-lg ${isActive('/') ? 'text-emerald-400' : 'text-white'
-                        } hover:text-emerald-400 transition-colors duration-200`}
-                >
+                    className={`text-lg ${isActive('/') ? 'text-emerald-400' : 'text-white'} hover:text-emerald-400 transition-colors duration-200`}>
                     Home
                 </Link>
                 <Link
                     href="/about"
-                    className={`text-lg ${isActive('/about') ? 'text-emerald-400' : 'text-white'
-                        } hover:text-emerald-400 transition-colors duration-200`}
-                >
+                    className={`text-lg ${isActive('/about') ? 'text-emerald-400' : 'text-white'} hover:text-emerald-400 transition-colors duration-200`}>
                     About
                 </Link>
                 <Link
