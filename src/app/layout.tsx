@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "portfolio-nextjs",
-  description: "The portfolio starting project folder for PROG3017",
+  description: "My Portfolio Website",
 };
 
 export default function RootLayout({ children }:Readonly<{ children: React.ReactNode }>) {
