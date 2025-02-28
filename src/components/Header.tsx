@@ -31,7 +31,7 @@ export default function Header() {
                     Projects
                 </Link>
                 <Link
-                    href="https://github.com/GDSampson"
+                    href="https://github.com/GDSampson/Portfolio"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-lg text-white hover:text-emerald-400 transition-colors duration-200"
